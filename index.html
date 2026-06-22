@@ -123,9 +123,7 @@
         .item-type{font-size:10px;color:var(--text-dim);margin-top:1px;}
         .item-dur{font-size:10px;color:var(--text-dim);}
 
-        /* ADD */
-        .add-btn{width:100%;padding:12px;background:linear-gradient(135deg,var(--gold-deep),var(--gold));color:var(--royal-deep);border:none;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s;-webkit-tap-highlight-color:transparent;}
-        .add-btn:hover{box-shadow:0 0 18px rgba(255,215,0,0.4);transform:translateY(-1px);}
+        /* ADD — DISABLED */
 
         /* FOOTER */
         .footer{text-align:center;font-size:10px;color:var(--text-dim);margin-top:20px;position:relative;z-index:2;}
@@ -314,33 +312,31 @@ var video=document.getElementById('video-player');
 
 // ── Playlist fixe de l'éclat (إذاعتي) ──
 var RADIO_TRACKS = [
-    {name:'نور', url:'https://kieda.online/نور (3).mp3', isVideo:false, duration:'--:--'},
-    {name:'يا من ظننت الهوى وعدًا يدوم', url:'https://kieda.online/يا من ظننت الهوى وعدًا يدوم (2).mp3', isVideo:false, duration:'--:--'},
-    {name:'Quarter In The Dryer', url:'https://kieda.online/Quarter In The Dryer (7).mp3', isVideo:false, duration:'--:--'},
-    {name:'Quarter In The Dryer II', url:'https://kieda.online/Quarter In The Dryer (9).mp3', isVideo:false, duration:'--:--'},
-    {name:'Quarter In The Dryer — Remix', url:'https://kieda.online/Quarter In The Dryer (Remix) (2).mp3', isVideo:false, duration:'--:--'},
-    {name:'Quarter In The Dryer — Remix II', url:'https://kieda.online/Quarter In The Dryer (Remix) (3).mp3', isVideo:false, duration:'--:--'},
+    {name:'نور', url:'https://kieda.online/%D9%86%D9%88%D8%B1%20(3).mp3', isVideo:false, duration:'--:--'},
+    {name:'يا من ظننت الهوى وعدًا يدوم', url:'https://kieda.online/%D9%8A%D8%A7%20%D9%85%D9%86%20%D8%B8%D9%86%D9%86%D8%AA%20%D8%A7%D9%84%D9%87%D9%88%D9%89%20%D9%88%D8%B9%D8%AF%D8%A7%D9%8B%20%D9%8A%D8%AF%D9%88%D9%85%20(2).mp3', isVideo:false, duration:'--:--'},
+    {name:'Quarter In The Dryer', url:'https://kieda.online/Quarter%20In%20The%20Dryer%20(7).mp3', isVideo:false, duration:'--:--'},
+    {name:'Quarter In The Dryer II', url:'https://kieda.online/Quarter%20In%20The%20Dryer%20(9).mp3', isVideo:false, duration:'--:--'},
+    {name:'Quarter In The Dryer — Remix', url:'https://kieda.online/Quarter%20In%20The%20Dryer%20(Remix)%20(2).mp3', isVideo:false, duration:'--:--'},
+    {name:'Quarter In The Dryer — Remix II', url:'https://kieda.online/Quarter%20In%20The%20Dryer%20(Remix)%20(3).mp3', isVideo:false, duration:'--:--'},
 ];
 window.addEventListener('load', function(){
     playlist = RADIO_TRACKS.slice();
     loadTrack(0);
 });
 
+// Autoplay après premier clic
+document.addEventListener('click', function autoplayOnce(){
+    if(playlist.length && !isPlaying){
+        playMedia();
+        document.removeEventListener('click', autoplayOnce);
+    }
+}, {once:true});
+
 function showNotif(msg,ok){
     Toastify({text:msg,duration:2500,gravity:'top',position:'center',style:{background:ok?'linear-gradient(135deg,#b8730a,#ffd700)':'linear-gradient(135deg,#8b0000,#e8445a)',color:ok?'#020b2e':'#fff',borderRadius:'8px',fontFamily:'Tajawal',fontSize:'13px'}}).showToast();
 }
 
-function addFiles(input){
-    Array.from(input.files).forEach(function(file){
-        var url=URL.createObjectURL(file);
-        var isVid=file.type.startsWith('video/');
-        playlist.push({name:file.name.replace(/\.[^.]+$/,''),url:url,isVideo:isVid,duration:'--:--'});
-    });
-    renderPlaylist();
-    if(currentIdx===-1&&playlist.length)loadTrack(0);
-    input.value='';
-    showNotif('✓ تمت الإضافة',true);
-}
+// Upload disabled — fixed playlist only
 
 function renderPlaylist(){ /* playlist masquée — radio publique */ }
 
@@ -426,7 +422,10 @@ function toggleRepeat(){
     document.getElementById('btn-repeat').classList.toggle('active',repeat);
 }
 
-function setVolume(v){audio.volume=v/100;video.volume=v/100;}
+function setVolume(v){
+    audio.volume=v/100;
+    video.volume=v/100;
+}
 
 function seekTo(e){
     var bar=document.getElementById('progress-bar');
