@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إذاعتي</title>
     <meta name="theme-color" content="#060d3a">
+    <meta name="description" content="إذاعتي — LORD RADIO STATION · 24/24 · موسيقى · كليبات · إبداع">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="إذاعتي">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%23020b2e' width='180' height='180'/%3E%3Ccircle cx='90' cy='90' r='55' fill='%23ffd700'/%3E%3Cpath d='M90 45 L102 72 L132 76 L110 97 L117 127 L90 108 L63 127 L70 97 L48 76 L78 72 Z' fill='%230d1a6e'/%3E%3C/svg%3E">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23020b2e' width='100' height='100'/%3E%3Ccircle cx='50' cy='50' r='35' fill='%23ffd700'/%3E%3C/svg%3E">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet">
     <style>
@@ -306,6 +313,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script>
+// ── REGISTER SERVICE WORKER ──
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('./sw.js').catch(function(err){
+        console.log('SW registration failed:',err);
+    });
+}
+
 var playlist=[],currentIdx=-1,isPlaying=false,shuffle=false,repeat=false;
 var audio=document.getElementById('audio-player');
 var video=document.getElementById('video-player');
