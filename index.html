@@ -234,10 +234,10 @@
 
     <!-- AJOUTER -->
     <div class="card">
-        <div class="sec-head"><span>➕</span><span>إضافة وسائط</span></div>
+        <div class="sec-head"><span>🔒</span><span>إضافة وسائط</span></div>
         <input type="file" id="file-input" accept="audio/*,video/*" multiple onchange="addFiles(this)" style="display:none;">
-        <button class="add-btn" onclick="document.getElementById('file-input').click()">
-            🎵 إضافة ملفات موسيقى أو كليبات
+        <button class="add-btn" onclick="unlockAdd()">
+            🔒 إضافة ملفات موسيقى أو كليبات
         </button>
     </div>
 
@@ -263,6 +263,21 @@
 var playlist=[],currentIdx=-1,isPlaying=false,shuffle=false,repeat=false;
 var audio=document.getElementById('audio-player');
 var video=document.getElementById('video-player');
+
+// ── SERRURE — ajout réservé au propriétaire ──
+var _addUnlocked=false;
+function unlockAdd(){
+    if(_addUnlocked){document.getElementById('file-input').click();return;}
+    var code=prompt('🔒 أدخل رمز الدخول لإضافة الملفات:');
+    if(code===null)return;
+    if(code==='arnouba32'){
+        _addUnlocked=true;
+        showNotif('🔓 تم فتح القفل',true);
+        document.getElementById('file-input').click();
+    } else {
+        showNotif('✗ رمز خاطئ',false);
+    }
+}
 
 function showNotif(msg,ok){
     Toastify({text:msg,duration:2500,gravity:'top',position:'center',style:{background:ok?'linear-gradient(135deg,#b8730a,#ffd700)':'linear-gradient(135deg,#8b0000,#e8445a)',color:ok?'#020b2e':'#fff',borderRadius:'8px',fontFamily:'Tajawal',fontSize:'13px'}}).showToast();
