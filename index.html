@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إذاعتي</title>
     <meta name="theme-color" content="#060d3a">
+    <meta name="description" content="إذاعتي — LORD RADIO STATION · 24/24 · موسيقى · كليبات · إبداع">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="إذاعتي">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%23020b2e' width='180' height='180'/%3E%3Ccircle cx='90' cy='90' r='55' fill='%23ffd700'/%3E%3Cpath d='M90 45 L102 72 L132 76 L110 97 L117 127 L90 108 L63 127 L70 97 L48 76 L78 72 Z' fill='%230d1a6e'/%3E%3C/svg%3E">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23020b2e' width='100' height='100'/%3E%3Ccircle cx='50' cy='50' r='35' fill='%23ffd700'/%3E%3C/svg%3E">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet">
     <style>
@@ -123,9 +130,7 @@
         .item-type{font-size:10px;color:var(--text-dim);margin-top:1px;}
         .item-dur{font-size:10px;color:var(--text-dim);}
 
-        /* ADD */
-        .add-btn{width:100%;padding:12px;background:linear-gradient(135deg,var(--gold-deep),var(--gold));color:var(--royal-deep);border:none;border-radius:8px;font-family:'Tajawal',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s;-webkit-tap-highlight-color:transparent;}
-        .add-btn:hover{box-shadow:0 0 18px rgba(255,215,0,0.4);transform:translateY(-1px);}
+        /* ADD — DISABLED */
 
         /* FOOTER */
         .footer{text-align:center;font-size:10px;color:var(--text-dim);margin-top:20px;position:relative;z-index:2;}
@@ -146,15 +151,28 @@
         .radio-waves.on span:nth-child(2){animation-delay:.25s;}
         .radio-waves.on span:nth-child(3){animation-delay:.5s;}
         @keyframes wave{0%{opacity:0;transform:rotate(-30deg) scale(0.4);}40%{opacity:0.9;}100%{opacity:0;transform:rotate(-30deg) scale(1.1);}}
-        .radio-body{background:linear-gradient(160deg,rgba(13,26,110,0.6),rgba(2,9,40,0.85));border:1.5px solid rgba(255,215,0,0.35);border-radius:18px;padding:18px;box-shadow:inset 0 1px 0 rgba(255,215,0,0.2),0 8px 30px rgba(0,0,0,0.4);position:relative;}
-        .radio-speaker{position:relative;height:88px;border-radius:12px;background:radial-gradient(circle at 50% 40%,rgba(255,215,0,0.08),rgba(2,9,40,0.6));border:1px solid rgba(255,215,0,0.2);margin-bottom:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-        .speaker-grille{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,215,0,0.18) 1px,transparent 1.6px);background-size:9px 9px;opacity:0.5;}
+        .radio-body{background:linear-gradient(160deg,#fff6cc 0%,#ffe066 16%,#e0a800 36%,#fff2b0 52%,#ffcc00 70%,#b8860a 88%,#ffd700 100%);border:1.5px solid rgba(255,250,200,0.8);border-radius:18px;padding:18px;box-shadow:inset 0 2px 3px rgba(255,255,220,0.9),inset 0 -2px 4px rgba(120,80,0,0.4),0 8px 30px rgba(0,0,0,0.5);position:relative;}
+        .radio-body::after{content:'';position:absolute;inset:0;border-radius:18px;background:linear-gradient(105deg,transparent 40%,rgba(255,255,240,0.45) 48%,transparent 56%);pointer-events:none;}
+        .radio-speaker{position:relative;height:88px;border-radius:12px;background:linear-gradient(160deg,#6b4e0a,#2e1f00);border:1px solid rgba(80,50,0,0.6);box-shadow:inset 0 2px 6px rgba(0,0,0,0.6),inset 0 -1px 0 rgba(255,215,0,0.25);margin-bottom:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+        .speaker-grille{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(0,0,0,0.5) 1.4px,transparent 2px);background-size:9px 9px;opacity:0.7;}
         .radio-dial{margin-bottom:14px;}
-        .dial-screen{position:relative;background:linear-gradient(180deg,rgba(255,215,0,0.1),rgba(2,9,40,0.5));border:1px solid rgba(255,215,0,0.3);border-radius:10px;padding:12px 14px 16px;text-align:center;overflow:hidden;}
-        .dial-freq{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--gold-bright);opacity:0.8;margin-bottom:5px;}
+        .dial-screen{position:relative;background:linear-gradient(180deg,#3a2e00,#1a1400);border:1px solid rgba(80,50,0,0.6);border-radius:10px;padding:12px 14px 18px;text-align:center;overflow:hidden;box-shadow:inset 0 2px 8px rgba(0,0,0,0.7),0 0 14px rgba(255,215,0,0.2);}
+        .dial-freq{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--gold-shine);opacity:0.95;margin-bottom:5px;text-shadow:0 0 6px rgba(255,215,0,0.7);}
+        .dial-station{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--gold-shine);opacity:0.7;margin-top:4px;}
+        .player-title{color:var(--gold-shine) !important;text-shadow:0 0 8px rgba(255,215,0,0.6);}
         .dial-needle{position:absolute;bottom:6px;left:8px;right:8px;height:2px;background:linear-gradient(90deg,transparent,var(--gold-bright),transparent);}
         .dial-needle::after{content:'';position:absolute;top:-3px;left:50%;width:2px;height:8px;background:var(--red);box-shadow:0 0 6px var(--red);animation:needle 4s ease-in-out infinite;}
         @keyframes needle{0%,100%{left:18%;}50%{left:82%;}}
+        .radio-body .ctrl-btn{color:#6b4e0a;}
+        .radio-body .ctrl-btn.play-main{background:linear-gradient(160deg,#fff6cc,#ffd700,#b8860a);color:#2e1f00;border:1px solid rgba(255,250,200,0.8);box-shadow:inset 0 1px 2px rgba(255,255,220,0.9),0 2px 6px rgba(120,80,0,0.5);}
+        .radio-body .ctrl-btn.active{color:#8a6500;text-shadow:none;}
+        .radio-body .time-row span,.radio-body .volume-row span{color:#6b4e0a;}
+        .radio-body input[type=range]{background:rgba(120,80,0,0.3);}
+        .radio-body input[type=range]::-webkit-slider-thumb{background:#6b4e0a;}
+        .radio-body .progress-bar{background:rgba(120,80,0,0.25);}
+        .radio-body .progress-fill{background:linear-gradient(90deg,#b8860a,#6b4e0a);}
+        .antenna-rod{width:3px;height:46px;background:linear-gradient(180deg,#fff6cc,#ffd700,#b8860a);border-radius:2px;box-shadow:0 0 6px var(--gold-glow);transform-origin:bottom center;transform:rotate(18deg);}
+        .antenna-tip{position:absolute;top:-6px;left:calc(50% + 14px);width:10px;height:10px;border-radius:50%;background:radial-gradient(circle,#fff6cc,#b8860a);box-shadow:0 0 12px var(--gold-glow),0 0 24px rgba(255,215,0,0.6);}
     </style>
 </head>
 <body>
@@ -248,7 +266,8 @@
                 <div class="radio-dial">
                     <div class="dial-screen">
                         <div class="dial-freq">FM · إذاعتي</div>
-                        <div class="player-title" id="player-title">جارٍ التشغيل...</div>
+                        <div class="player-title" id="player-title">🔴 على الهواء مباشرة</div>
+                        <div class="dial-station">LORD RADIO STATION · 24/24</div>
                         <div class="dial-needle"></div>
                     </div>
                 </div>
@@ -265,13 +284,13 @@
                     <span id="time-tot">0:00</span>
                 </div>
 
-                <!-- Boutons -->
+                <!-- Boutons — VISIBLE BUT DISABLED -->
                 <div class="controls">
-                    <button class="ctrl-btn" onclick="prevTrack()">⏮</button>
-                    <button class="ctrl-btn" id="btn-shuffle" onclick="toggleShuffle()" title="عشوائي">🔀</button>
+                    <button class="ctrl-btn" disabled>⏮</button>
+                    <button class="ctrl-btn" id="btn-shuffle" disabled>🔀</button>
                     <button class="ctrl-btn play-main" onclick="togglePlay()" id="btn-play">▶</button>
-                    <button class="ctrl-btn" id="btn-repeat" onclick="toggleRepeat()" title="تكرار">🔁</button>
-                    <button class="ctrl-btn" onclick="nextTrack()">⏭</button>
+                    <button class="ctrl-btn" id="btn-repeat" disabled>🔁</button>
+                    <button class="ctrl-btn" disabled>⏭</button>
                 </div>
 
                 <!-- Volume -->
@@ -294,39 +313,44 @@
 
 <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script>
+// ── SERVICE WORKER DISABLED ──
+// if('serviceWorker' in navigator){
+//     navigator.serviceWorker.register('./sw.js').catch(function(err){
+//         console.log('SW registration failed:',err);
+//     });
+// }
+
 var playlist=[],currentIdx=-1,isPlaying=false,shuffle=false,repeat=false;
 var audio=document.getElementById('audio-player');
 var video=document.getElementById('video-player');
 
 // ── Playlist fixe de l'éclat (إذاعتي) ──
 var RADIO_TRACKS = [
-    {name:'نور', url:'نور (3).mp3', isVideo:false, duration:'--:--'},
-    {name:'يا من ظننت الهوى وعدًا يدوم', url:'يا من ظننت الهوى وعدًا يدوم (2).mp3', isVideo:false, duration:'--:--'},
-    {name:'Quarter In The Dryer', url:'Quarter In The Dryer (7).mp3', isVideo:false, duration:'--:--'},
-    {name:'Quarter In The Dryer II', url:'Quarter In The Dryer (9).mp3', isVideo:false, duration:'--:--'},
-    {name:'Quarter In The Dryer — Remix', url:'Quarter In The Dryer (Remix) (2).mp3', isVideo:false, duration:'--:--'},
-    {name:'Quarter In The Dryer — Remix II', url:'Quarter In The Dryer (Remix) (3).mp3', isVideo:false, duration:'--:--'},
+    {name:'نور', url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', isVideo:false, duration:'--:--'},
+    {name:'يا من ظننت الهوى وعدًا يدوم', url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', isVideo:false, duration:'--:--'},
+    {name:'Quarter In The Dryer', url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', isVideo:false, duration:'--:--'},
+    {name:'Quarter In The Dryer II', url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3', isVideo:false, duration:'--:--'},
+    {name:'Quarter In The Dryer — Remix', url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3', isVideo:false, duration:'--:--'},
+    {name:'Quarter In The Dryer — Remix II', url:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3', isVideo:false, duration:'--:--'},
 ];
 window.addEventListener('load', function(){
     playlist = RADIO_TRACKS.slice();
     loadTrack(0);
 });
 
+// Autoplay après premier clic
+document.addEventListener('click', function autoplayOnce(){
+    if(playlist.length && !isPlaying){
+        playMedia();
+        document.removeEventListener('click', autoplayOnce);
+    }
+}, {once:true});
+
 function showNotif(msg,ok){
     Toastify({text:msg,duration:2500,gravity:'top',position:'center',style:{background:ok?'linear-gradient(135deg,#b8730a,#ffd700)':'linear-gradient(135deg,#8b0000,#e8445a)',color:ok?'#020b2e':'#fff',borderRadius:'8px',fontFamily:'Tajawal',fontSize:'13px'}}).showToast();
 }
 
-function addFiles(input){
-    Array.from(input.files).forEach(function(file){
-        var url=URL.createObjectURL(file);
-        var isVid=file.type.startsWith('video/');
-        playlist.push({name:file.name.replace(/\.[^.]+$/,''),url:url,isVideo:isVid,duration:'--:--'});
-    });
-    renderPlaylist();
-    if(currentIdx===-1&&playlist.length)loadTrack(0);
-    input.value='';
-    showNotif('✓ تمت الإضافة',true);
-}
+// Upload disabled — fixed playlist only
 
 function renderPlaylist(){ /* playlist masquée — radio publique */ }
 
@@ -334,8 +358,6 @@ function loadTrack(idx){
     if(idx<0||idx>=playlist.length)return;
     currentIdx=idx;
     var t=playlist[idx];
-    var titleEl=document.getElementById('player-title');
-    if(titleEl)titleEl.textContent=t.name;
     audio.pause();video.pause();
     video.style.display='none';
     document.getElementById('progress-fill').style.width='0%';
@@ -387,7 +409,7 @@ function nextTrack(){
 function playJingleThen(cb){
     if(!window.speechSynthesis){if(cb)cb();return;}
     window.speechSynthesis.cancel();
-    var u=new SpeechSynthesisUtterance('Radio LORD... إذاعتي... LORD SIDHOM I');
+    var u=new SpeechSynthesisUtterance('LORD Radio Station... twenty four, twenty four... إذاعتي');
     u.lang='ar-SA'; u.rate=0.78; u.pitch=1.1; u.volume=1;
     var voices=window.speechSynthesis.getVoices();
     var v=voices.find(function(x){return x.lang==='ar-SA';})
@@ -414,7 +436,10 @@ function toggleRepeat(){
     document.getElementById('btn-repeat').classList.toggle('active',repeat);
 }
 
-function setVolume(v){audio.volume=v/100;video.volume=v/100;}
+function setVolume(v){
+    audio.volume=v/100;
+    video.volume=v/100;
+}
 
 function seekTo(e){
     var bar=document.getElementById('progress-bar');
@@ -454,7 +479,7 @@ setInterval(updateProgress,500);
 // ── JINGLE RADIO LORD ──
 function playJingle(){
     if(!window.speechSynthesis)return;
-    var u=new SpeechSynthesisUtterance('Radio LORD... إذاعتي... LORD SIDHOM I — The Conceptor');
+    var u=new SpeechSynthesisUtterance('LORD Radio Station... twenty four, twenty four... إذاعتي... LORD SIDHOM I — The Conceptor');
     u.lang='ar-SA'; u.rate=0.78; u.pitch=1.1; u.volume=1;
     var voices=window.speechSynthesis.getVoices();
     var v=voices.find(function(x){return x.lang==='ar-SA';})
